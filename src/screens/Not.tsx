@@ -1,5 +1,5 @@
 function Not() {
-  return <div>dg</div>;
+  return <div>Not</div>;
 }
 
 export default Not;

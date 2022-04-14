@@ -16,6 +16,7 @@ module.exports = {
     fontFamily: {
       sans: ["ui-sans-serif", "system-ui"],
       head: ["Kaushan Script", "cursive", "system-ui"],
+      main: ["Noto Sans KR", "sans-serif"],
     },
   },
   plugins: [],

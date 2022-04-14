@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -21,12 +22,15 @@ input {
   .form-title {
     @apply mb-8 mt-8 font-head text-4xl;
   }
+  .form-main {
+    @apply w-64 h-10 shadow-sm shadow-slate-100 border-b-[1px] text-xs flex justify-center items-center flex-col gap-2 absolute top-0;
+  }
 
   .form-error-message {
     @apply mt-2 h-4 flex text-pink-400 justify-center items-center text-[12px];
   }
 
   .box-default {
-    @apply w-64 bg-white ring-1 ring-gray-100 rounded shadow-md flex justify-center items-center gap-2;
+    @apply w-64 bg-white ring-1 ring-gray-100 rounded shadow-md flex justify-center items-center gap-2 dark:bg-slate-800 dark:ring-gray-900;
   }
 }

@@ -1,5 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -61,7 +61,7 @@ function Sign() {
     getValues,
     setError,
   } = useForm<IFormValues>({
-    mode: "onTouched",
+    mode: "onBlur",
   });
 
   const [createAccount] = useMutation(CREATE_ACCOUNT_MT, { onCompleted });
@@ -74,15 +74,15 @@ function Sign() {
   };
 
   return (
-    <div className="w-screen h-screen pb-12 flex justify-center items-center flex-col gap-2">
+    <div className="w-screen h-screen flex justify-center items-center flex-col gap-2">
       <Helmet>
         <title>회원가입 · Coffeegram</title>
       </Helmet>
       <form
-        className="box-default h-96 flex-col"
+        className="box-default h-[26rem] flex-col"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="form-title">Coffeegram</div>
+        <div className="form-title">SignUp</div>
         <input
           {...register("email", {
             required: "이메일을 형식에 맞춰 작성해 주십시오.",

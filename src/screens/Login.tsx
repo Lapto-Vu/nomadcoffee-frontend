@@ -2,7 +2,7 @@ import { gql, useMutation } from "@apollo/client";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { LogUserIn } from "../apollo";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 interface IFormValues {
   username: string;
@@ -53,7 +53,7 @@ function Login() {
     formState: { errors, isValid },
     setError,
   } = useForm<IFormValues>({
-    mode: "onTouched",
+    mode: "onChange",
   });
 
   const onSubmit: SubmitHandler<IFormValues> = (data) => {
@@ -64,7 +64,7 @@ function Login() {
   const navigate = useNavigate();
   const location = useLocation();
   return (
-    <div className="w-screen h-screen pb-12 flex justify-center items-center flex-col gap-2">
+    <div className="w-screen h-screen flex justify-center items-center flex-col gap-2">
       <Helmet>
         <title>로그인 · Coffeegram</title>
       </Helmet>
@@ -72,7 +72,7 @@ function Login() {
         className="relative box-default h-96 flex-col"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="form-title">Coffeegram</div>
+        <div className="form-title">Login</div>
         <input
           {...register("username", {
             required: "아이디는 적어도 3자 이상이어야 합니다.",

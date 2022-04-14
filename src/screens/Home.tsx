@@ -1,34 +1,49 @@
-import { useReactiveVar } from "@apollo/client";
-import { Link } from "react-router-dom";
-import { isLoggedInVar, LogUserOut } from "../apollo";
-import Nav from "./Nav";
+import { gql, useQuery } from "@apollo/client";
+import { useNavigate } from "react-router-dom";
+
+const SEE_COFFEESHOPS_QR = gql`
+  query seeCoffeeShops {
+    seeCoffeeShops {
+      ok
+      error
+      coffeeShop {
+        id
+        name
+        photos {
+          id
+          url
+        }
+        categories {
+          slug
+        }
+        user {
+          username
+        }
+        createdAt
+      }
+    }
+  }
+`;
 
 function Home() {
-  const isLoggedIn = useReactiveVar(isLoggedInVar);
+  const { data } = useQuery(SEE_COFFEESHOPS_QR);
+  const navigate = useNavigate();
   return (
-    <div className="h-screen w-screen flex justify-center items-center flex-col gap-2">
-      {isLoggedIn ? <Nav /> : ""}
-      <div className="box-default h-24">
-        <div className="font-head text-4xl">Coffeegram</div>
-      </div>
-      <div className="box-default text-xs h-24 flex-col">
-        <div>아직 콘텐츠가 없습니다.</div>
-        <div> 작업 중에 있습니다...</div>
-      </div>
-      <div className="box-default h-12 text-xs">
-        {isLoggedIn ? (
-          <div
-            className="text-blue-400 cursor-pointer"
-            onClick={() => LogUserOut()}
-          >
-            로그아웃하기
+    <div className="h-screen w-screen flex justify-center items-center flex-row gap-4">
+      {data?.seeCoffeeShops?.coffeeShop?.map((feed: any) => (
+        <div
+          key={feed.id}
+          className="box-default w-48 flex-col cursor-pointer py-6"
+          onClick={() => navigate(`/shop/${feed.id}`)}
+        >
+          <div className="h-48 w-24 flex justify-center items-center">
+            <img src={feed.photos[0].url} alt={feed.photos[0].id} />
           </div>
-        ) : (
-          <Link to="/login" className="text-blue-400">
-            로그인
-          </Link>
-        )}
-      </div>
+          <div className="flex gap-2 text-sm">
+            <div>{feed.name}</div>-<div>{feed.user.username}</div>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
