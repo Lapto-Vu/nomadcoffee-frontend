@@ -1,26 +1,29 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ThemeProvider } from "styled-components";
 import Home from "./screens/Home";
 import Login from "./screens/Login";
 import Not from "./screens/Not";
-import { darkTheme, lightTheme } from "./styles/theme";
-import { GlobalStyle } from "./styles/globalStyle";
-import { useReactiveVar } from "@apollo/client";
-import { isLoggedInVar, whichThemeIsVar } from "./apollo";
+import Sign from "./screens/Sign";
+import Footer from "./screens/Footer";
+import { ApolloProvider } from "@apollo/client";
+import { client } from "./apollo";
+import Add from "./screens/Add";
 
 function App() {
-  const currentTheme = useReactiveVar(whichThemeIsVar);
-  const isLoggedIn = useReactiveVar(isLoggedInVar);
   return (
-    <ThemeProvider theme={currentTheme ? darkTheme : lightTheme}>
-      <GlobalStyle />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={isLoggedIn ? <Home /> : <Login />} />
-          <Route path="*" element={<Not />} />
-        </Routes>
-      </BrowserRouter>
-    </ThemeProvider>
+    <BrowserRouter>
+      <ApolloProvider client={client}>
+        <div className="bg-slate-50 dark:bg-slate-400">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/sign" element={<Sign />} />
+            <Route path="/add" element={<Add />} />
+            <Route path="/*" element={<Not />} />
+          </Routes>
+          <Footer />
+        </div>
+      </ApolloProvider>
+    </BrowserRouter>
   );
 }
 

@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+@layer components {
+  .form-input-text {
+    @apply h-7 w-48 bg-slate-50 ring-1 ring-slate-100 rounded text-xs shadow-sm shadow-slate-300 p-2 focus:outline-none placeholder:text-xs focus:ring-blue-400 focus:ring-2;
+  }
+
+  .form-button {
+    @apply h-7 w-48 text-white font-bold bg-blue-500 rounded flex justify-center items-center text-xs mt-2 ring-1 shadow-sm shadow-slate-100 ring-blue-100 disabled:bg-blue-50 disabled:text-slate-300 disabled:font-normal;
+  }
+
+  .form-title {
+    @apply mb-8 mt-8 font-head text-4xl;
+  }
+
+  .form-error-message {
+    @apply mt-2 h-4 flex text-pink-400 justify-center items-center text-[12px];
+  }
+
+  .box-default {
+    @apply w-64 bg-white ring-1 ring-gray-100 rounded shadow-md flex justify-center items-center gap-2;
+  }
+}
