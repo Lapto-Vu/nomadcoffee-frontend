@@ -38,8 +38,6 @@ function Shop() {
   const { data, loading } = useQuery(SEE_COFFEESHOP_QR, {
     variables: { id: parseId },
   });
-  console.log(data);
-  console.log(loading);
   const {
     register,
     handleSubmit,
@@ -53,6 +51,11 @@ function Shop() {
   };
 
   const onCompleted = () => {};
+
+  const set = data?.seeCoffeeShop?.coffeeShop.categories.reduce(
+    (pr: any, cr: any) => ({ slug: `${pr.slug} ${cr.slug}` })
+  );
+
   return (
     <div className="h-screen w-screen flex justify-center items-center flex-col gap-2">
       {loading ? (
@@ -80,9 +83,7 @@ function Shop() {
           ></input>
           <input
             {...register("categories", {
-              value: data?.seeCoffeeShop?.coffeeShop.categories.reduce(
-                (pr: any, cr: any) => ({ slug: `${pr.slug} ${cr.slug}` })
-              ),
+              value: set?.slug,
             })}
             placeholder="카테고리"
             type="text"
