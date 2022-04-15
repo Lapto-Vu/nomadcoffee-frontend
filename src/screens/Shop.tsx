@@ -81,7 +81,7 @@ function Shop() {
           <input
             {...register("categories", {
               value: data?.seeCoffeeShop?.coffeeShop.categories.reduce(
-                (pr: any, cr: any) => `${pr.slug} ${cr.slug}`
+                (pr: any, cr: any) => ({ slug: `${pr.slug} ${cr.slug}` })
               ),
             })}
             placeholder="카테고리"

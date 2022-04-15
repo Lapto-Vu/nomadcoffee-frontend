@@ -2,13 +2,14 @@ import { ApolloClient, InMemoryCache, makeVar } from "@apollo/client";
 
 const TOKEN = "token";
 
+export const isLoggedInVar = makeVar(Boolean(localStorage.getItem(TOKEN)));
+
 export const whichThemeIsVar = makeVar(
   Boolean(
     localStorage.getItem("theme") ||
       window.matchMedia("(prefers-color-scheme: dark)").matches
   )
 );
-export const isLoggedInVar = makeVar(Boolean(localStorage.getItem(TOKEN)));
 
 export const setDark = () => {
   document.documentElement.classList.add("dark");
