@@ -1,4 +1,4 @@
-import { gql, useMutation, useReactiveVar } from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
 import {
   faHashtag,
   faImage,
@@ -6,10 +6,8 @@ import {
   faPen,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { isLoggedInVar } from "../apollo";
 
 interface IFormValues {
   name: string;
@@ -17,10 +15,10 @@ interface IFormValues {
   latitude: string;
   longitude: string;
   internal: string;
+  photoFiles: string;
 }
 
 const CREATE_COFFEESHOP_MT = gql`
-  scalar Upload
   mutation createCoffeeShop(
     $name: String!
     $latitude: String
@@ -37,6 +35,7 @@ const CREATE_COFFEESHOP_MT = gql`
     ) {
       ok
       error
+      type
     }
   }
 `;
@@ -45,29 +44,22 @@ interface IResultData {
   createCoffeeShop: {
     ok: boolean;
     error?: string;
+    type: "internal";
   };
 }
 
 function Add() {
-  const isLoggedIn = useReactiveVar(isLoggedInVar);
-  const naviate = useNavigate();
-  useEffect(() => {
-    if (!isLoggedIn) {
-      naviate("/");
-    }
-  }, [isLoggedIn, naviate]);
-
-  const onSubmit: SubmitHandler<IFormValues> = (data) => {
-    console.log(data);
-  };
-
+  const navigate = useNavigate();
+  const onSubmit: SubmitHandler<IFormValues> = (data) =>
+    createCoffeeShop({ variables: { ...data } });
   const onCompleted = (data: IResultData) => {
     const {
-      createCoffeeShop: { ok, error },
+      createCoffeeShop: { ok, error, type },
     } = data;
-
     if (!ok) {
+      setError(type, { message: error });
     } else {
+      navigate("/");
     }
   };
 
@@ -150,6 +142,7 @@ function Add() {
           <FontAwesomeIcon icon={faImage} /> 사진을 올려주세요.
         </div>
         <input
+          {...register("photoFiles")}
           type="file"
           className="file:text-[0.7rem] text-[0.7rem] file:font-normal m-1 ml-8 file:border-0 file:rounded-sm file:bg-blue-50 file:text-gray-400 hover:file:bg-blue-100 file:cursor-pointer"
         ></input>

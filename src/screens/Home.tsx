@@ -1,5 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 
 const SEE_COFFEESHOPS_QR = gql`
@@ -27,14 +27,14 @@ const SEE_COFFEESHOPS_QR = gql`
 `;
 
 function Home() {
-  const { data } = useQuery(SEE_COFFEESHOPS_QR);
+  const { data, loading } = useQuery(SEE_COFFEESHOPS_QR);
   const navigate = useNavigate();
   return (
     <div className="h-screen w-screen flex justify-center items-center flex-row gap-4">
       <Helmet>
         <title>Coffeegram</title>
       </Helmet>
-      {data?.seeCoffeeShops?.coffeeShop?.map((feed: any) => (
+      {/* {data?.seeCoffeeShops?.coffeeShop?.map((feed: any) => (
         <div
           key={feed.id}
           className="box-default w-48 flex-col cursor-pointer py-6"
@@ -47,7 +47,7 @@ function Home() {
             <div>{feed.name}</div>-<div>{feed.user.username}</div>
           </div>
         </div>
-      ))}
+      ))} */}
     </div>
   );
 }

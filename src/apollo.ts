@@ -1,4 +1,33 @@
-import { ApolloClient, InMemoryCache, makeVar } from "@apollo/client";
+import {
+  ApolloClient,
+  InMemoryCache,
+  makeVar,
+  ApolloLink,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+import { createUploadLink } from "apollo-upload-client";
+
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem(TOKEN);
+  return {
+    headers: {
+      ...headers,
+      token: token ? token : "",
+    },
+  };
+});
+
+const uploadLink = createUploadLink({
+  uri:
+    process.env.NODE_ENV === "production"
+      ? "https://coffee-backend-lapto.herokuapp.com/"
+      : "http://192.168.0.48:4000",
+});
+
+export const client = new ApolloClient({
+  link: ApolloLink.from([authLink, uploadLink]),
+  cache: new InMemoryCache(),
+});
 
 const TOKEN = "token";
 
@@ -34,11 +63,3 @@ export const LogUserOut = () => {
   localStorage.removeItem(TOKEN);
   isLoggedInVar(false);
 };
-
-export const client = new ApolloClient({
-  uri:
-    process.env.NODE_ENV === "production"
-      ? "https://coffee-backend-lapto.herokuapp.com/"
-      : "http://localhost:4000",
-  cache: new InMemoryCache(),
-});

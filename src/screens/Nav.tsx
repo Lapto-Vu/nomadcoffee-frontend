@@ -1,4 +1,3 @@
-import { useReactiveVar } from "@apollo/client";
 import {
   faCircleUser,
   faPersonWalkingDashedLineArrowRight,
@@ -6,11 +5,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
-import { isLoggedInVar, LogUserOut } from "../apollo";
+import { LogUserOut } from "../apollo";
+import Avatar from "../Components/Avatar";
+import useUser from "../hooks/useUser";
 
 function Nav() {
-  const isLoggedIn = useReactiveVar(isLoggedInVar);
   const navigate = useNavigate();
+  const currentUser = useUser();
   return (
     <div className="fixed top-0 w-screen bg-white h-12 shadow-sm flex justify-between items-center px-4 text-xl dark:bg-slate-800">
       <div
@@ -20,20 +21,29 @@ function Nav() {
         Coffeegram
       </div>
       <div className="flex gap-3">
-        {isLoggedIn ? (
+        {currentUser && currentUser?.username ? (
+          <>
+            <FontAwesomeIcon
+              className="cursor-pointer"
+              icon={faSquarePlus}
+              onClick={() => navigate("/add")}
+            />
+            <div className="flex w-5 h-5">
+              <Avatar url={currentUser?.avatarURL} userId={currentUser?.id} />
+            </div>
+            <FontAwesomeIcon
+              className="cursor-pointer"
+              icon={faPersonWalkingDashedLineArrowRight}
+              onClick={() => LogUserOut()}
+            />
+          </>
+        ) : (
           <FontAwesomeIcon
             className="cursor-pointer"
-            icon={faSquarePlus}
-            onClick={() => navigate("/add")}
+            icon={faCircleUser}
+            onClick={() => navigate("/login")}
           />
-        ) : (
-          ""
         )}
-        <FontAwesomeIcon
-          className="cursor-pointer"
-          icon={isLoggedIn ? faPersonWalkingDashedLineArrowRight : faCircleUser}
-          onClick={() => (isLoggedIn ? LogUserOut() : navigate("/login"))}
-        />
       </div>
     </div>
   );

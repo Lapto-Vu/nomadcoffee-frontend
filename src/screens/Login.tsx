@@ -56,13 +56,12 @@ function Login() {
     mode: "onChange",
   });
 
-  const onSubmit: SubmitHandler<IFormValues> = (data) => {
-    const { username, password } = data;
-    login({ variables: { username, password } });
-  };
+  const onSubmit: SubmitHandler<IFormValues> = (data) =>
+    login({ variables: { ...data } });
 
   const navigate = useNavigate();
   const location = useLocation();
+
   return (
     <div className="w-screen h-screen flex justify-center items-center flex-col gap-2">
       <Helmet>

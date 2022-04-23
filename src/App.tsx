@@ -10,6 +10,7 @@ import Add from "./screens/Add";
 import Nav from "./screens/Nav";
 import { HelmetProvider } from "react-helmet-async";
 import Shop from "./screens/Shop";
+import Profile from "./screens/Profile";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
               <Route path="/sign" element={<Sign />} />
               <Route path="/add" element={<Add />} />
               <Route path="/shop/:id" element={<Shop />} />
+              <Route path="/profile/:userid" element={<Profile />} />
               <Route path="/*" element={<Not />} />
             </Routes>
             <Footer />

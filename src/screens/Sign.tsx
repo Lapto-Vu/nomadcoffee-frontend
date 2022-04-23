@@ -69,8 +69,8 @@ function Sign() {
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<IFormValues> = (data) => {
-    const { name, password, username, email } = data;
-    createAccount({ variables: { name, password, username, email } });
+    const { name, username, password, email } = data;
+    createAccount({ variables: { name, username, password, email } });
   };
 
   return (
