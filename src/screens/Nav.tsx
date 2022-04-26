@@ -13,7 +13,7 @@ function Nav() {
   const navigate = useNavigate();
   const currentUser = useUser();
   return (
-    <div className="fixed top-0 w-screen bg-white h-12 shadow-sm flex justify-between items-center px-4 text-xl dark:bg-slate-800">
+    <div className="flex-none w-screen bg-white h-10 shadow-sm flex justify-between items-center px-4 text-xl dark:bg-slate-800">
       <div
         className="font-head mb-1 cursor-pointer"
         onClick={() => navigate("/")}

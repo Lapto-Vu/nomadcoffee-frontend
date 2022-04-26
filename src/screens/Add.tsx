@@ -8,6 +8,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { SEE_COFFEESHOPS_QR } from "./Home";
 
 interface IFormValues {
   name: string;
@@ -51,7 +52,10 @@ interface IResultData {
 function Add() {
   const navigate = useNavigate();
   const onSubmit: SubmitHandler<IFormValues> = (data) =>
-    createCoffeeShop({ variables: { ...data } });
+    createCoffeeShop({
+      variables: { ...data },
+      refetchQueries: [{ query: SEE_COFFEESHOPS_QR }],
+    });
   const onCompleted = (data: IResultData) => {
     const {
       createCoffeeShop: { ok, error, type },

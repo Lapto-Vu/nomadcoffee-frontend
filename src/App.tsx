@@ -17,7 +17,7 @@ function App() {
     <BrowserRouter>
       <ApolloProvider client={client}>
         <HelmetProvider>
-          <div className="font-main bg-slate-50 dark:bg-slate-900 text-gray-700 dark:text-white">
+          <div className="font-main bg-slate-100 dark:bg-slate-900 text-gray-700 dark:text-white">
             <Nav />
             <Routes>
               <Route path="/" element={<Home />} />
