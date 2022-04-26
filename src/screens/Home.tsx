@@ -36,7 +36,7 @@ function Home() {
   const { data, loading } = useQuery(SEE_COFFEESHOPS_QR);
   const navigate = useNavigate();
   return (
-    <div className="w-screen h-screen grid grid-cols-5 grid-rows-3 gap-4 p-4">
+    <div className="w-screen h-[calc(100vh-100px)] grid grid-cols-5 grid-rows-3 gap-4 p-4">
       <Helmet>
         <title>Coffeegram</title>
       </Helmet>
@@ -55,30 +55,26 @@ function Home() {
                 </section>
                 <section className="h-1/4 w-full flex flex-col justify-between">
                   <article className="h-1/2 flex pt-1 items-center pl-1">
-                    {feed.categories.map((i: any) => {
+                    {feed.categories.map((i: { slug: string }) => {
                       return (
-                        <span className="text-gray-400 text-[0.6rem]">
-                          {i.slug}
-                        </span>
+                        <>
+                          <span className="text-gray-400 text-xs">
+                            {i.slug + "\u00a0\u00a0"}
+                          </span>
+                        </>
                       );
                     })}
                   </article>
-                  <article className="h-1/2 w-full flex items-center px-1 justify-between">
-                    <span className="text-[0.6rem]">{feed.name}</span>
-                    <div className="h-full w-14 flex items-center justify-between">
-                      <div className="h-[0.6rem] w-[0.6rem] flex justify-center items-center">
+                  <article className="h-1/2 w-full flex items-end justify-between px-1 pb-[2px]">
+                    <span className="text-xs">{feed.name}</span>
+                    <div className="flex gap-2">
+                      <span className="text-xs">{feed.user.username}</span>
+                      <div className="w-4 flex justify-center items-center">
                         <Avatar
                           url={feed.user.avatarURL}
                           userId={feed.user.id}
                         />
                       </div>
-                      <FontAwesomeIcon
-                        className="h-[0.6rem] w-[0.6rem] flex justify-center items-center"
-                        icon={faHeart}
-                      />
-                      <span className="text-[0.6rem] mb-[1px]">
-                        {feed.user.username}
-                      </span>
                     </div>
                   </article>
                 </section>

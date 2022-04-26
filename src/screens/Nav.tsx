@@ -12,8 +12,12 @@ import useUser from "../hooks/useUser";
 function Nav() {
   const navigate = useNavigate();
   const currentUser = useUser();
+  const logOutAndRoutToHome = () => {
+    LogUserOut();
+    navigate("/");
+  };
   return (
-    <div className="flex-none w-screen bg-white h-10 shadow-sm flex justify-between items-center px-4 text-xl dark:bg-slate-800">
+    <div className="flex-none w-screen bg-white h-[50px] shadow-sm flex justify-between items-center px-4 text-xl dark:bg-slate-800">
       <div
         className="font-head mb-1 cursor-pointer"
         onClick={() => navigate("/")}
@@ -34,7 +38,7 @@ function Nav() {
             <FontAwesomeIcon
               className="cursor-pointer"
               icon={faPersonWalkingDashedLineArrowRight}
-              onClick={() => LogUserOut()}
+              onClick={() => logOutAndRoutToHome()}
             />
           </>
         ) : (

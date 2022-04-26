@@ -28,7 +28,7 @@ function Profile() {
     variables: { id: parseId },
   });
   return (
-    <div className="h-screen w-screen flex justify-center items-center flex-col">
+    <div className="h-[calc(100vh-100px)] w-screen flex justify-center items-center flex-col">
       {!loading && data?.seeProfile?.ok ? (
         <div className="box-default h-96 w-80 flex-col p-4">
           <section className="flex w-full margin h-1/4 rounded">

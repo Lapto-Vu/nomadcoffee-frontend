@@ -79,7 +79,7 @@ function Add() {
   const [createCoffeeShop] = useMutation(CREATE_COFFEESHOP_MT, { onCompleted });
 
   return (
-    <div className="h-screen w-screen flex justify-center items-center flex-col gap-2">
+    <div className="h-[calc(100vh-100px)] w-screen flex justify-center items-center flex-col gap-2">
       <form
         className="relative box-default h-[30rem] flex-col pt-12"
         onSubmit={handleSubmit(onSubmit)}

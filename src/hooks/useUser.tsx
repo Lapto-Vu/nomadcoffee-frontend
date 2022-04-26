@@ -23,7 +23,7 @@ function useUser() {
     if (!data?.currentUser?.ok && !loading) {
       LogUserOut();
     }
-  }, [data]);
+  }, [data, loading]);
   return data?.currentUser?.user;
 }
 

@@ -42,7 +42,6 @@ function Shop() {
     register,
     handleSubmit,
     formState: { errors, isValid },
-    setError,
   } = useForm<IFormValues>({
     mode: "onBlur",
   });
@@ -50,14 +49,12 @@ function Shop() {
     console.log(data);
   };
 
-  const onCompleted = () => {};
-
   const set = data?.seeCoffeeShop?.coffeeShop.categories.reduce(
     (pr: any, cr: any) => ({ slug: `${pr.slug} ${cr.slug}` })
   );
 
   return (
-    <div className="h-screen w-screen flex justify-center items-center flex-col gap-2">
+    <div className="h-[calc(100vh-100px)] w-screen flex justify-center items-center flex-col gap-2">
       {loading ? (
         ""
       ) : (

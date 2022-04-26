@@ -10,7 +10,7 @@ function Footer() {
     setTheme(themeState);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
   return (
-    <div className="w-screen h-10 flex-none bg-white shadow-md ring-1 text-gray-300 text-xs ring-slate-100 dark:ring-slate-900 flex justify-center items-center gap-4 dark:bg-slate-800">
+    <div className="w-screen h-[50px] flex-none bg-white shadow-md ring-1 text-gray-300 text-xs ring-slate-100 dark:ring-slate-900 flex justify-center items-center gap-4 dark:bg-slate-800">
       <span>© 2022 coffeegram from Lapto</span>
       <FontAwesomeIcon
         icon={themeState ? faSun : faMoon}

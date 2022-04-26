@@ -74,7 +74,7 @@ function Sign() {
   };
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center flex-col gap-2">
+    <div className="w-screen h-[calc(100vh-100px)] flex justify-center items-center flex-col gap-2">
       <Helmet>
         <title>회원가입 · Coffeegram</title>
       </Helmet>

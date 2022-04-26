@@ -63,7 +63,7 @@ function Login() {
   const location = useLocation();
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center flex-col gap-2">
+    <div className="w-scrren h-[calc(100vh-100px)] flex justify-center items-center flex-col gap-2">
       <Helmet>
         <title>로그인 · Coffeegram</title>
       </Helmet>
