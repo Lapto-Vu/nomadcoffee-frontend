@@ -21,7 +21,7 @@ const uploadLink = createUploadLink({
   uri:
     process.env.NODE_ENV === "production"
       ? "https://coffee-backend-lapto.herokuapp.com/"
-      : "http://localhost:4000",
+      : "http://192.168.0.48:4000",
 });
 
 export const client = new ApolloClient({
